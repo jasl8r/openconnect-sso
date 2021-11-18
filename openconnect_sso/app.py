@@ -137,7 +137,7 @@ async def _run(args, cfg):
     display_mode = config.DisplayMode[args.browser_display_mode.upper()]
 
     auth_response = await authenticate_to(
-        selected_profile, args.proxy, credentials, display_mode
+        selected_profile, args.proxy, credentials, display_mode, args.hostscan_data
     )
 
     if args.on_disconnect and not cfg.on_disconnect:
@@ -165,9 +165,9 @@ async def select_profile(profile_list):
     return selection
 
 
-def authenticate_to(host, proxy, credentials, display_mode):
+def authenticate_to(host, proxy, credentials, display_mode, hostscan_data):
     logger.info("Authenticating to VPN endpoint", name=host.name, address=host.address)
-    return Authenticator(host, proxy, credentials).authenticate(display_mode)
+    return Authenticator(host, proxy, credentials, hostscan_data).authenticate(display_mode)
 
 
 def run_openconnect(auth_info, host, proxy, args):

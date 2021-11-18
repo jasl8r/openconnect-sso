@@ -99,6 +99,13 @@ def create_argparser():
     )
 
     parser.add_argument(
+        "-d",
+        "--hostscan-data",
+        help="Hostscan data to send on CSD request",
+        default="",
+    )
+
+    parser.add_argument(
         "openconnect_args",
         help="Arguments passed to openconnect",
         action=StoreOpenConnectArgs,
